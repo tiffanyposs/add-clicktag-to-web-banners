@@ -1,0 +1,21 @@
+{
+  "name": "add-clicktag",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tiffany Poss",
+  "license": "MIT",
+  "bin": {
+    "add-clicktag": "bin/add-clicktag"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "fs-extra": "^7.0.1",
+    "minimist": "^1.2.0",
+    "pretty": "^2.0.0",
+    "readdir-enhanced": "^2.2.4"
+  }
+}
