@@ -28,7 +28,13 @@ module.exports = folder => {
 
 	// get the updated code and save it
 	for (let path of htmlPaths) {
-		const htmlWithClicktag = addClicktag(path);
-		fs.writeFileSync(path, htmlWithClicktag);
+
+		try {
+			const htmlWithClicktag = addClicktag(path);
+			fs.writeFileSync(path, htmlWithClicktag);
+		} catch(err) {
+			console.log(err);
+		}
+
 	}
 }

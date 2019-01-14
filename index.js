@@ -6,11 +6,16 @@ module.exports = () => {
 
 	console.log('Welcome to add-clicktag');
 
-	switch(folder) {
-		case 'empty':
-		  console.log('Folder path needs to be provided');
-			break;
-		default:
-			require('./cmds/add-clicktag')(folder);
+	try {
+		switch(folder) {
+			case 'empty':
+				throw new Error('Folder path needs to be provided')
+				break;
+			default:
+				require('./cmds/add-clicktag')(folder);
+		}
+	} catch(err) {
+		console.log(err);
 	}
+
 }

@@ -32,16 +32,22 @@ module.exports = path => {
 
 	// read the size of the canvas
 	const $ = cheerio.load(htmlFileContents);
-	const width = $('canvas').attr('width');
-	const height = $('canvas').attr('height');
+	const $canvas = $('canvas');
+	if (!$canvas.length) throw new Error(`<canvas> element required.\nFile: ${path}`)
+	const width = $canvas.attr('width');
+	const height = $canvas.attr('height');
+
+	if (!width || !height) throw new Error(`Canvas element must have a height and a width attribute.\nFile: ${path}`);
 
 	// get the clicktag html and add it to the temp html file
 	const clicktagOne = clicktagPartOne(width, height);
 	const clicktagTwo = clicktagPartTwo();
 
-	$('title').after(clicktagOne[1]);
-	$('title').after(clicktagOne[0]);
-	$('canvas').wrap(clicktagTwo);
+	const $title = $('title')
+	if(!$title.length) throw new Error(`HTML file must have a <title> tag.\nFile: ${path}`)
+	$title.after(clicktagOne[1]);
+	$title.after(clicktagOne[0]);
+	$canvas.wrap(clicktagTwo);
 
 	return pretty($.html());
 
