@@ -5,7 +5,7 @@ const readdir = require('readdir-enhanced');
 const addClicktag = require('../helpers/add-clicktag');
 
 
-module.exports = folder => {
+module.exports = (folder, clicktag) => {
 
 	// get current folder and new folder paths
 	const folderPath = `./${folder}`;
@@ -30,7 +30,7 @@ module.exports = folder => {
 	for (let path of htmlPaths) {
 
 		try {
-			const htmlWithClicktag = addClicktag(path);
+			const htmlWithClicktag = addClicktag(path, clicktag);
 			fs.writeFileSync(path, htmlWithClicktag);
 		} catch(err) {
 			console.log(err);

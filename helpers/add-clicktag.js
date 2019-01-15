@@ -10,9 +10,9 @@ const pretty = require('pretty');
  * @param height height of example banner
  * @return {Array}
 */
-const clicktagPartOne = (width, height) => {
+const clicktagPartOne = (width, height, clicktag) => {
 	const meta = `<meta name="ad.size" content="width=${width},height=${height}">`;
-	const script = `<script type="text/javascript">var clickTag = ""</script>`;
+	const script = `<script type="text/javascript">var clickTag = "${clicktag}"</script>`;
 	return [meta, script];
 }
 
@@ -26,7 +26,7 @@ const clicktagPartTwo = () => {
 	return `<a href="javascript:window.open(window.clickTag)"></a>`;
 }
 
-module.exports = path => {
+module.exports = (path, clicktag) => {
 
 	const htmlFileContents = fs.readFileSync(path);
 
@@ -40,7 +40,7 @@ module.exports = path => {
 	if (!width || !height) throw new Error(`Canvas element must have a height and a width attribute.\nFile: ${path}`);
 
 	// get the clicktag html and add it to the temp html file
-	const clicktagOne = clicktagPartOne(width, height);
+	const clicktagOne = clicktagPartOne(width, height, clicktag);
 	const clicktagTwo = clicktagPartTwo();
 
 	const $title = $('title')
