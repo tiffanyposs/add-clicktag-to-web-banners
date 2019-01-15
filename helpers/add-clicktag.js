@@ -26,12 +26,27 @@ const clicktagPartTwo = () => {
 	return `<a href="javascript:window.open(window.clickTag)"></a>`;
 }
 
+const removeExistingClicktags = $ => {
+	const meta = $('meta[name="ad.size"]');
+	const script = $('script').filter((index, elem) => $(elem).html().includes('var clickTag = "'));
+	const a = $('a[href="javascript:window.open(window.clickTag)"]');
+
+	if (meta.length) meta.remove();
+	if (script.length) script.remove();
+	if (a.length) {
+		const canvas = $('canvas');
+		a.replaceWith(canvas);
+	}
+	return $;
+}
+
 module.exports = (path, clicktag) => {
 
 	const htmlFileContents = fs.readFileSync(path);
 
 	// read the size of the canvas
-	const $ = cheerio.load(htmlFileContents);
+	let $ = cheerio.load(htmlFileContents);
+	$ = removeExistingClicktags($);
 	const $canvas = $('canvas');
 	if (!$canvas.length) throw new Error(`<canvas> element required.\nFile: ${path}`)
 	const width = $canvas.attr('width');
