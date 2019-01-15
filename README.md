@@ -33,7 +33,7 @@ $ npm links
 
 ### Using the CLI
 
-Pass the directory name your would like to process, the CLI will clone the directory and attempt to add the clicktag code to *all* files ending in `.html`.
+Pass the directory name your would like to process, the CLI will clone the directory and attempt to add the clicktag code to *all* files ending in `.html`. If a clicktag already exists, it will remove it and replace it with updated.
 
 ```
 project
@@ -54,4 +54,10 @@ If you are in the project folder, and you run the below command, it will process
 
 ```
 $ add-clicktag banner
+```
+
+If you want to add a custom clicktag url you can pass it as the second argument
+
+```
+$ add-clicktag banner http://www.somewebsite.com/
 ```
